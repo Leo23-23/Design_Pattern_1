@@ -16,11 +16,10 @@ public class App {
     
     
     public static void main(String args[])throws Exception{
-        /*String jdbcURL = "jdbc:postgresql://localhost:5432/test";
-        String username = "postgres";
-        String password = "RcathoL(PostgreSQL)23;";*/
         
             System.out.println("Bienvenue sur Clinique Konsoru !");
+            Gestion_BDD ma_base_D = new Gestion_BDD();
+            ma_base_D.connexion_a_bdd();
             Menu menu_principal = new Menu();
             Integer choix_utilisateur ; 
             do {
@@ -29,33 +28,23 @@ public class App {
                 choix_utilisateur =  menu_principal.f_choix_utilisateur();
                 switch (choix_utilisateur) {
                     case 1:
+                    //afficher les créneaux de rendez-vous disponibles pour une date donnée
                     System.out.println("Bienvenu dans le menu 1");
                     break;
-                    case 2:
+                    case 2: //prendre un rendez-vous (date, créneau, nom vétérinaire, nom client)
                         System.out.println("Bienvenu dans le menu 2");
                         break;
-                    case 3:
+                    case 3://lister les rendez-vous d’un client
                         System.out.println("Bienvenu dans le menu 3");
                         break;
-                    case 4:
+                    case 4://supprimer un rendez-vous
                         System.out.println("Bienvenu dans le menu 4");
                         break;
-                    case 5:
-                        System.out.println("Bienvenu dans le menu 5");
-                        break;
-                    case 6:
-                        System.out.println("Bienvenu dans le menu 6");
-                        break;
-                    case 7:
-                        System.out.println("Bienvenu dans le menu 7");
-                        break;
-                    case 8:
-                        System.out.println("Bienvenu dans le menu 8");
-                        break;
-                    case 9:
+                    case 9: // quitter
                         System.out.println("Au revoir");
                         break;
                     default:
+                        System.out.println("Je ne connais pas cette commande");
                         break;
             }
         } while (choix_utilisateur != 9);
