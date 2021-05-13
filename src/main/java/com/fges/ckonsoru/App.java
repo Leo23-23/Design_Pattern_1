@@ -14,17 +14,52 @@ import java.util.Properties;
  */
 public class App {
     
+    
     public static void main(String args[])throws Exception{
         /*String jdbcURL = "jdbc:postgresql://localhost:5432/test";
         String username = "postgres";
         String password = "RcathoL(PostgreSQL)23;";*/
         
-        System.out.println("Bienvenue sur Clinique Konsoru !");
-        Menu menu_principal = new Menu();
-        System.out.println(menu_principal);
-        System.out.println("votre choix :");
-        int choix_utilisateur = menu_principal.f_choix_utilisateur();
-        System.out.println("votre choix est le : "+ choix_utilisateur);
+            System.out.println("Bienvenue sur Clinique Konsoru !");
+            Menu menu_principal = new Menu();
+            Integer choix_utilisateur ; 
+            do {
+                System.out.println(menu_principal);
+                System.out.println("votre choix :");
+                choix_utilisateur =  menu_principal.f_choix_utilisateur();
+                switch (choix_utilisateur) {
+                    case 1:
+                    System.out.println("Bienvenu dans le menu 1");
+                    break;
+                    case 2:
+                        System.out.println("Bienvenu dans le menu 2");
+                        break;
+                    case 3:
+                        System.out.println("Bienvenu dans le menu 3");
+                        break;
+                    case 4:
+                        System.out.println("Bienvenu dans le menu 4");
+                        break;
+                    case 5:
+                        System.out.println("Bienvenu dans le menu 5");
+                        break;
+                    case 6:
+                        System.out.println("Bienvenu dans le menu 6");
+                        break;
+                    case 7:
+                        System.out.println("Bienvenu dans le menu 7");
+                        break;
+                    case 8:
+                        System.out.println("Bienvenu dans le menu 8");
+                        break;
+                    case 9:
+                        System.out.println("Au revoir");
+                        break;
+                    default:
+                        break;
+            }
+        } while (choix_utilisateur != 9);
+        
         /*try { 
             Connection connexion = DriverManager.getConnection(jdbcURL, username, password);
             System.out.println("connected");
