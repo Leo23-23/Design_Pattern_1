@@ -20,6 +20,11 @@ public class App {
         String password = "RcathoL(PostgreSQL)23;";*/
         
         System.out.println("Bienvenue sur Clinique Konsoru !");
+        Menu menu_principal = new Menu();
+        System.out.println(menu_principal);
+        System.out.println("votre choix :");
+        int choix_utilisateur = menu_principal.f_choix_utilisateur();
+        System.out.println("votre choix est le : "+ choix_utilisateur);
         /*try { 
             Connection connexion = DriverManager.getConnection(jdbcURL, username, password);
             System.out.println("connected");
@@ -31,7 +36,7 @@ public class App {
             }*/
         
         // chargement de la configuration de la persistence
-        ConfigLoader cf = new ConfigLoader();
+        /*ConfigLoader cf = new ConfigLoader();
         Properties properties = cf.getProperties();
         System.out.println("Mode de persistence : "
                 +properties.getProperty("persistence"));
@@ -43,7 +48,7 @@ public class App {
             catch(SQLException e){ 
               System.out.println("erreur de connexion a la base de donnée");
               e.printStackTrace();
-            }
+            }*/
         /*System.out.println("Url : "
                 +properties.getProperty("bdd.url"));
         System.out.println("Login : "
