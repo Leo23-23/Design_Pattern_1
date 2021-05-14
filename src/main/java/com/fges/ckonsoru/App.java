@@ -5,7 +5,6 @@
  */
 package com.fges.ckonsoru;
 import java.sql.*;
-
 import java.util.Properties;
 
 /**
@@ -19,7 +18,7 @@ public class App {
         
             System.out.println("Bienvenue sur Clinique Konsoru !");
             Gestion_BDD ma_base_D = new Gestion_BDD();
-            ma_base_D.connexion_a_bdd();
+            //ma_base_D.connexion_a_bdd();
             Menu menu_principal = new Menu();
             Integer choix_utilisateur ; 
             do {
@@ -29,12 +28,13 @@ public class App {
                 switch (choix_utilisateur) {
                     case 1:
                     //afficher les créneaux de rendez-vous disponibles pour une date donnée
-                    System.out.println("Bienvenu dans le menu 1");
-                    break;
-                    case 2: //prendre un rendez-vous (date, créneau, nom vétérinaire, nom client)
-                        System.out.println("Bienvenu dans le menu 2");
+                        System.out.println("Créneaux disponibles");
+                        ma_base_D.afficher_creneau_rdv_dispo();
                         break;
-                    case 3://lister les rendez-vous d’un client
+                    case 2: //lister les rendez-vous d’un client
+                        System.out.println("Affichage des rendez vous par client");
+                        break;
+                    case 3://prendre un rendez-vous (date, créneau, nom vétérinaire, nom client)
                         System.out.println("Bienvenu dans le menu 3");
                         break;
                     case 4://supprimer un rendez-vous
