@@ -1,6 +1,7 @@
 package com.fges.ckonsoru;
 import java.util.Scanner;
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Menu {
@@ -8,6 +9,7 @@ public class Menu {
     public ArrayList<String> mes_choix;
     public Integer choix_utilisateur;
     public String choix_utilisateur2;
+    public LocalDateTime choix_horaire;
 
     public Menu() {
         this.en_tete = "Actions Disponibles :";
@@ -31,11 +33,17 @@ public class Menu {
     }
 
 
-    public String f_choix_nom_client(){
+    public String f_choix_str(){
         Scanner sc = new Scanner(System.in);
         choix_utilisateur2 = sc.nextLine();
         return choix_utilisateur2;
     } 
+
+    /*public LocalDateTime f_choix_horaire(){
+        Scanner sc = new Scanner(System.in);
+        choix_horaire = sc.nextDate();
+        return choix_horaire;
+    } */
 
     @Override
     public String toString() {

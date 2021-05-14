@@ -5,6 +5,7 @@
  */
 package com.fges.ckonsoru;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 /**
@@ -35,11 +36,21 @@ public class App {
                     case 2: //lister les rendez-vous d’un client
                         System.out.println("Affichage des rendez vous par client");
                         System.out.println("Entrer le nom du client : ");
-                        choix_nom_client = menu_principal.f_choix_nom_client();
+                        choix_nom_client = menu_principal.f_choix_str();
                         ma_base_D.Get_client_rdv(choix_nom_client);
                         break;
                     case 3://prendre un rendez-vous (date, créneau, nom vétérinaire, nom client)
-                        System.out.println("Bienvenu dans le menu 3");
+                        System.out.println("Entrer le nom du veterinaire : ");
+                        String choix_nom_veto = menu_principal.f_choix_str();
+                        System.out.println("Entrer le nom du client qui souhaite prendre rdv : ");
+                        String choix_nom_client_rdv = menu_principal.f_choix_str();
+                        System.out.println("Entrer un creneau : ");
+                        String choix_horaire = menu_principal.f_choix_str();
+                        if (!ma_base_D.Rdv_Disponible_veterinaire(choix_nom_veto, choix_horaire )) {
+                            System.out.println("Le rdv n' existe pas / n 'est pas disponible ");
+                            break;   
+                        }
+                        ma_base_D.PrendreRdv(choix_nom_veto, choix_nom_client_rdv, choix_horaire);
                         break;
                     case 4://supprimer un rendez-vous
                         System.out.println("Bienvenu dans le menu 4");

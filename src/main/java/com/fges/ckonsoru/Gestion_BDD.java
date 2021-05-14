@@ -126,4 +126,87 @@ public class Gestion_BDD {
             System.out.println("Une erreur s' est produit pendant pour afficher les rendez vous du client : " + e);
         }
     }
+
+
+
+    // je voudrais une fonction quime renvoi TRUE / FALSE en fonction de la disponibilité d' un rendez vous => il me faut le nom du veterinaire et un horraire pour avoir sa disponibilité ou non
+    public  Boolean Rdv_Disponible_veterinaire (String nom_veterinaire, String horaire) {
+        try { 
+            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
+            System.out.println("connected");
+            /*connexion.close();*/
+        }
+        catch(SQLException e){ 
+            System.out.println("erreur de connexion a la base de donnée");
+            e.printStackTrace();
+        }        
+        try {
+            
+            String My_request = "SELECT * FROM disponibilite"
+                            + " WHERE dis_debut = '"+ horaire + "' AND vet_id = (SELECT vet_id FROM veterinaire WHERE vet_nom = '" + nom_veterinaire + "') ;";
+            
+            String My_request2 = "SELECT * FROM rendezvous"
+                            + " WHERE rv_debut = '2021-03-18 " + horaire + "' AND vet_id = (SELECT vet_id FROM veterinaire WHERE vet_nom = '" + nom_veterinaire + "') ;";
+            
+            PreparedStatement statement = connexion.prepareStatement(My_request);
+            ResultSet res = statement.executeQuery();
+            
+            PreparedStatement statement2 = connexion.prepareStatement(My_request2);
+            ResultSet res2 = statement2.executeQuery();
+            
+            Integer compteur = 0;
+            Integer compteur2 = 0;
+                
+            while (res.next()) {
+                compteur ++;
+            }
+                
+            while (res2.next()) {
+                compteur2 ++;
+            }
+            
+            connexion.close();
+            
+            return compteur > 0 && compteur2 == 0;
+            
+        } catch (SQLException e) {
+            System.out.println("Une erreur est apparue lors de l' affichage de la disponibilté du medecin : "+e);
+        }
+        
+        return false;
+    }
+
+
+
+    public void PrendreRdv(String nom_veterinaire, String nom_client, String horaire) {
+        
+        try { 
+            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
+            System.out.println("connected");
+            /*connexion.close();*/
+        }
+        catch(SQLException e){ 
+            System.out.println("erreur de connexion a la base de donnée");
+            e.printStackTrace();
+        }     
+        try {
+            
+            String My_request = "INSERT INTO rendezvous (vet_id, rv_debut, rv_client)" +
+                            "    VALUES ((SELECT vet_id FROM veterinaire WHERE vet_nom = '" + nom_veterinaire + "')," +
+                            "        '18-03-2021 " + horaire + "'," +
+                            "        '" + nom_client + "');";
+            
+            PreparedStatement statement = connexion.prepareStatement(My_request);
+            statement.executeUpdate();
+            
+            connexion.close();
+            System.out.println("Rendez vous pris avec succes");
+            
+            
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la prise de rendez vous : " + e);
+        
+        }
+       
+    }    
 }
