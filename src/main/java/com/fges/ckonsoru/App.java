@@ -29,7 +29,7 @@ public class App {
                 choix_utilisateur =  menu_principal.f_choix_utilisateur();
                 switch (choix_utilisateur) {
                     case 1:
-                    //afficher les créneaux de rendez-vous disponibles pour une date donnée
+                        //afficher les créneaux de rendez-vous disponibles pour une date donnée
                         System.out.println("Créneaux disponibles");
                         ma_base_D.afficher_creneau_rdv_dispo();
                         break;
@@ -40,6 +40,7 @@ public class App {
                         ma_base_D.Get_client_rdv(choix_nom_client);
                         break;
                     case 3://prendre un rendez-vous (date, créneau, nom vétérinaire, nom client)
+                        System.out.println("Prendre un rendez-vous : ");
                         System.out.println("Entrer le nom du veterinaire : ");
                         String choix_nom_veto = menu_principal.f_choix_str();
                         System.out.println("Entrer le nom du client qui souhaite prendre rdv : ");
@@ -53,7 +54,13 @@ public class App {
                         ma_base_D.PrendreRdv(choix_nom_veto, choix_nom_client_rdv, choix_horaire);
                         break;
                     case 4://supprimer un rendez-vous
-                        System.out.println("Bienvenu dans le menu 4");
+                        System.out.println("verifier qu' un redez_vous existe : ");
+                        System.out.println("Entrer le nom du client : ");
+                        String choix_nom_client_rdv_sup = menu_principal.f_choix_str();
+                        System.out.println("Entrer un horaire : ");
+                        String choix_horaire_sup = menu_principal.f_choix_str();
+                        boolean mon_bool = ma_base_D.verifier_rdv_exist(choix_nom_client_rdv_sup,choix_horaire_sup);
+                        System.out.println(mon_bool);
                         break;
                     case 9: // quitter
                         System.out.println("Au revoir");

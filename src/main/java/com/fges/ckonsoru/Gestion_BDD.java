@@ -208,5 +208,81 @@ public class Gestion_BDD {
         
         }
        
-    }    
+    }
+    
+    
+
+    // pour pouvoir supprimer un rendez vous , je dopis deja commencer par veridier qu' il existe bien avec la fonction suivante : verifier_rdv_exist()
+    public Boolean verifier_rdv_exist (String nom_client, String horaire) {
+        try { 
+            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
+            System.out.println("connected");
+            /*connexion.close();*/
+        }
+        catch(SQLException e){ 
+            System.out.println("erreur de connexion a la base de donnée");
+            e.printStackTrace();
+        }          
+        try {
+            
+            String My_request = "SELECT * FROM rendezvous"
+                            + " WHERE rv_debut = '2021-03-18 " + horaire + "' AND rv_client = '" + nom_client + "' ;";
+            
+            PreparedStatement statement = connexion.prepareStatement(My_request);
+            ResultSet res = statement.executeQuery();
+            
+            Integer compteur = 0;
+                
+            while (res.next()) {
+                compteur ++;
+            }
+            
+            connexion.close();
+
+            if(compteur == 0){
+                System.out.println("Le rendez_vous n' existe pas");
+            }
+            return compteur > 0; // si true, alors, le rendez vous existe, si false, alors le rendez vous n' existe pas
+            
+        } catch (SQLException e) {
+            System.out.println("une erreur est apparue lors de la verifiacation de l 'existence du rendez_vous : "+e);
+            return false;
+        }   
+    }
+    
+    
+    /*public static int SupprimerRdv(String nom_client, String horaire) {
+        
+        // Vérification de la validité des informations
+        
+        if (!DatabaseManager.RdvExists(nom_client, horaire)) {
+            System.out.println("This rdv doesn't exist");
+            return -1;
+        }
+        
+        try {
+            DatabaseManager.connection = DriverManager.getConnection(jdbcUrl, username, password);
+            System.out.println("Connection to database succeeded");
+        } catch (SQLException ex) {
+            System.out.println("Error occured while connecting to database : "+ex);
+        }
+        
+        try {
+            
+            String request = "DELETE FROM rendezvous"
+                    + " WHERE rv_client = '" + nom_client + "' AND rv_debut = '2021-03-18 " + horaire + "';";
+            
+            PreparedStatement statement = DatabaseManager.connection.prepareStatement(request);
+            statement.executeQuery();
+            
+            DatabaseManager.connection.close();
+            
+            return 1;
+            
+        } catch (SQLException ex) {
+            System.out.println("An error occured while deleting the client's rdv : " + ex);
+        }
+        
+        return 0;
+    }*/
 }
