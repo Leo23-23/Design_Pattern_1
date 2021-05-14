@@ -16,15 +16,7 @@ public class Gestion_BDD {
         this.jdbcUrl = properties.getProperty("bdd.url");
         this.username = properties.getProperty("bdd.login");
         this.password = properties.getProperty("bdd.mdp");
-        /*try { 
-            Connection connexion = DriverManager.getConnection(properties.getProperty("bdd.url"), properties.getProperty("bdd.login"), properties.getProperty("bdd.mdp"));
-            System.out.println("connected");
-            connexion.close();
-        }
-        catch(SQLException e){ 
-            System.out.println("erreur de connexion a la base de donnée");
-            e.printStackTrace();
-        }*/
+
     }
     public void connexion_a_bdd (){
         /*System.out.println(this.jdbcUrl);
