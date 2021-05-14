@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package com.fges.ckonsoru;
-import java.sql.*;
-import java.time.LocalDateTime;
-import java.util.Properties;
 
 /**
  * Launch the App
@@ -59,8 +56,11 @@ public class App {
                         String choix_nom_client_rdv_sup = menu_principal.f_choix_str();
                         System.out.println("Entrer un horaire : ");
                         String choix_horaire_sup = menu_principal.f_choix_str();
-                        boolean mon_bool = ma_base_D.verifier_rdv_exist(choix_nom_client_rdv_sup,choix_horaire_sup);
-                        System.out.println(mon_bool);
+                        if (!ma_base_D.verifier_rdv_exist(choix_nom_client_rdv_sup, choix_horaire_sup)) {
+                            System.out.println("Le rendez_vous n' existe pas");
+                            break;    
+                        }
+                        ma_base_D.SupprimerRdv(choix_nom_client_rdv_sup,choix_horaire_sup);
                         break;
                     case 9: // quitter
                         System.out.println("Au revoir");
@@ -68,8 +68,9 @@ public class App {
                     default:
                         System.out.println("Je ne connais pas cette commande");
                         break;
-            }
-        } while (choix_utilisateur != 9);
+                }
+            
+            } while (choix_utilisateur != 9);
         
         /*try { 
             Connection connexion = DriverManager.getConnection(jdbcURL, username, password);

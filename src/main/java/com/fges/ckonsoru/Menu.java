@@ -15,8 +15,8 @@ public class Menu {
         this.en_tete = "Actions Disponibles :";
         
         ArrayList<String> liste = new ArrayList<>();
-        liste.add("1 - Afficher les créneaux disponibles pour une date donnée");
-        liste.add("2 - Lister les rdv passés, présents et à venir d'un client");
+        liste.add("1 - Afficher les creneaux disponibles pour une date donnee");
+        liste.add("2 - Lister les rdv passes, presents et a venir d'un client");
         liste.add("3 - Prendre un rdv");
         liste.add("4 - Supprimer un rdv");
         liste.add("9 - Quitter");
@@ -27,23 +27,30 @@ public class Menu {
     }
     //dans ma classe menu , je voudrais une fonctions qui ecoute la reponse de l' utilisateur et la retourne : 
     public Integer f_choix_utilisateur(){
-        Scanner sc = new Scanner(System.in);
-        choix_utilisateur = sc.nextInt();
-        return choix_utilisateur;
+        try {
+            Scanner sc = new Scanner(System.in);
+            choix_utilisateur = sc.nextInt();
+            return choix_utilisateur;
+            
+        } catch (Exception e) {
+            System.out.println("Je m' attends a un nombre");
+            return 0;
+        }    
     }
 
 
     public String f_choix_str(){
-        Scanner sc = new Scanner(System.in);
-        choix_utilisateur2 = sc.nextLine();
-        return choix_utilisateur2;
+        try {
+            Scanner sc = new Scanner(System.in);
+            choix_utilisateur2 = sc.nextLine();
+            return choix_utilisateur2;
+            
+        } catch (Exception e) {
+            System.out.println("Je m' attends a un mot");
+            return  "NON";
+        }
+        
     } 
-
-    /*public LocalDateTime f_choix_horaire(){
-        Scanner sc = new Scanner(System.in);
-        choix_horaire = sc.nextDate();
-        return choix_horaire;
-    } */
 
     @Override
     public String toString() {
