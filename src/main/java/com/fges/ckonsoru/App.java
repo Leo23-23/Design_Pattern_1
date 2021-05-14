@@ -21,6 +21,7 @@ public class App {
             //ma_base_D.connexion_a_bdd();
             Menu menu_principal = new Menu();
             Integer choix_utilisateur ; 
+            String choix_nom_client ; 
             do {
                 System.out.println(menu_principal);
                 System.out.println("votre choix :");
@@ -33,6 +34,9 @@ public class App {
                         break;
                     case 2: //lister les rendez-vous d’un client
                         System.out.println("Affichage des rendez vous par client");
+                        System.out.println("Entrer le nom du client : ");
+                        choix_nom_client = menu_principal.f_choix_nom_client();
+                        ma_base_D.Get_client_rdv(choix_nom_client);
                         break;
                     case 3://prendre un rendez-vous (date, créneau, nom vétérinaire, nom client)
                         System.out.println("Bienvenu dans le menu 3");

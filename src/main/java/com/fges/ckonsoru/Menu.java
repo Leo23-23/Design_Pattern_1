@@ -7,6 +7,7 @@ public class Menu {
     public String en_tete;
     public ArrayList<String> mes_choix;
     public Integer choix_utilisateur;
+    public String choix_utilisateur2;
 
     public Menu() {
         this.en_tete = "Actions Disponibles :";
@@ -27,10 +28,14 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         choix_utilisateur = sc.nextInt();
         return choix_utilisateur;
+    }
+
+
+    public String f_choix_nom_client(){
+        Scanner sc = new Scanner(System.in);
+        choix_utilisateur2 = sc.nextLine();
+        return choix_utilisateur2;
     } 
-
-
-
 
     @Override
     public String toString() {

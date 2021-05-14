@@ -88,4 +88,18 @@ public class Gestion_BDD {
             System.out.println("une erreur est apparue en ouvrant la liste des creneaux disponible : " + e);
         }
     }
+
+    //je voudrai une fonction qui affiche les rendez vous pris d' un client en donnant à la fonction le nom du client.
+    public void Get_client_rdv (String Nom){
+        try { 
+            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
+            System.out.println("connected");
+            System.out.println("Bonjour "+ Nom );
+            /*connexion.close();*/
+        }
+        catch(SQLException e){ 
+            System.out.println("erreur de connexion a la base de donnée");
+            e.printStackTrace();
+        }
+    }
 }
