@@ -25,7 +25,7 @@ public class Gestion_BDD {
         try { 
             connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
             System.out.println("connected");
-            connexion.close();
+           /* connexion.close();*/
         }
         catch(SQLException e){ 
             System.out.println("erreur de connexion a la base de donnée");
@@ -33,25 +33,17 @@ public class Gestion_BDD {
         }
     }
 
-    public void afficher_creneau_rdv_dispo (){
-        try { 
-            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
-            System.out.println("connected");
-            /*connexion.close();*/
-        }
-        catch(SQLException e){ 
-            System.out.println("erreur de connexion a la base de donnée");
-            e.printStackTrace();
-        }
+    public void afficher_creneau_rdv_dispo ( String date){
+        connexion_a_bdd();
         try {
             String my_request = "WITH creneauxDisponibles AS " +
-                            "	(SELECT vet_nom, generate_series('18-03-2021'::date+dis_debut," +
-                            "						   '18-03-2021'::date+dis_fin-'00:20:00'::time," +
+                            "	(SELECT vet_nom, generate_series('"+date+"'::date+dis_debut," +
+                            "						   '"+date+"'::date+dis_fin-'00:20:00'::time," +
                             "						   '20 minutes'::interval) debut" +
                             "	FROM disponibilite" +
                             "		INNER JOIN veterinaire" +
                             "			ON veterinaire.vet_id = disponibilite.vet_id" +
-                            "	WHERE dis_jour = EXTRACT('DOW' FROM '18-03-2021'::date)" +
+                            "	WHERE dis_jour = EXTRACT('DOW' FROM '"+date+"'::date)" +
                             "	ORDER BY vet_nom, dis_id)," +
                             "	creneauxReserves AS " +
                             "	(SELECT vet_nom, rv_debut debut" +
@@ -59,8 +51,8 @@ public class Gestion_BDD {
                             "		INNER JOIN veterinaire" +
                             "		ON veterinaire.vet_id = rendezvous.vet_id" +
                             "		WHERE rv_debut " +
-                            "		BETWEEN '18-03-2021'::date " +
-                            "		AND '18-03-2021'::date +'23:59:59'::time)," +
+                            "		BETWEEN '"+date+"'::date " +
+                            "		AND '"+date+"'::date +'23:59:59'::time)," +
                             "	creneauxRestants AS" +
                             "	(SELECT * FROM creneauxDisponibles" +
                             "	EXCEPT" +
@@ -72,7 +64,7 @@ public class Gestion_BDD {
             ResultSet res = statement.executeQuery();
                 
             while (res.next()) {
-                System.out.println(res.getString(1) + " " + res.getString(2) );
+                System.out.println(res.getString(1) + " disponible le : " + res.getString(2) );
             }
             
             connexion.close();
@@ -86,16 +78,7 @@ public class Gestion_BDD {
     
     //je voudrai une fonction qui affiche les rendez vous pris d' un client en donnant à la fonction le nom du client.
     public void Get_client_rdv (String Nom){
-        try { 
-            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
-            System.out.println("connected");
-            System.out.println("Voici la liste des rdv de "+ Nom );
-            /*connexion.close();*/
-        }
-        catch(SQLException e){ 
-            System.out.println("erreur de connexion a la base de donnée");
-            e.printStackTrace();
-        }
+        connexion_a_bdd();
         try {
             
             String my_request = "SELECT rv_id, rv_debut, rv_client, vet_nom" +
@@ -131,15 +114,7 @@ public class Gestion_BDD {
 
     // je voudrais une fonction quime renvoi TRUE / FALSE en fonction de la disponibilité d' un rendez vous => il me faut le nom du veterinaire et un horraire pour avoir sa disponibilité ou non
     public  Boolean Rdv_Disponible_veterinaire (String nom_veterinaire, String horaire) {
-        try { 
-            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
-            System.out.println("connected");
-            /*connexion.close();*/
-        }
-        catch(SQLException e){ 
-            System.out.println("erreur de connexion a la base de donnée");
-            e.printStackTrace();
-        }        
+        connexion_a_bdd();        
         try {
             
             String My_request = "SELECT * FROM disponibilite"
@@ -180,15 +155,7 @@ public class Gestion_BDD {
 
     public void PrendreRdv(String nom_veterinaire, String nom_client, String horaire) {
         
-        try { 
-            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
-            System.out.println("connected");
-            /*connexion.close();*/
-        }
-        catch(SQLException e){ 
-            System.out.println("erreur de connexion a la base de donnée");
-            e.printStackTrace();
-        }     
+        connexion_a_bdd();   
         try {
             
             String My_request = "INSERT INTO rendezvous (vet_id, rv_debut, rv_client)" +
@@ -214,15 +181,7 @@ public class Gestion_BDD {
 
     // pour pouvoir supprimer un rendez vous , je dopis deja commencer par veridier qu' il existe bien avec la fonction suivante : verifier_rdv_exist()
     public Boolean verifier_rdv_exist (String nom_client, String horaire) {
-        try { 
-            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
-            System.out.println("connected");
-            /*connexion.close();*/
-        }
-        catch(SQLException e){ 
-            System.out.println("erreur de connexion a la base de donnée");
-            e.printStackTrace();
-        }          
+        connexion_a_bdd();         
         try {
             
             String My_request = "SELECT * FROM rendezvous"
@@ -249,15 +208,7 @@ public class Gestion_BDD {
     
     public void SupprimerRdv(String nom_client, String horaire) {
         
-        try { 
-            connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
-            System.out.println("connected");
-            /*connexion.close();*/
-        }
-        catch(SQLException e){ 
-            System.out.println("erreur de connexion a la base de donnée");
-            e.printStackTrace();
-        } 
+        connexion_a_bdd();
         try {
             
             String My_request = "DELETE FROM rendezvous"
