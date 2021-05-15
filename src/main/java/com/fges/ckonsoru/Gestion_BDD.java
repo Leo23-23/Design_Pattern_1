@@ -2,7 +2,7 @@ package com.fges.ckonsoru;
 import java.sql.*;
 import java.util.Properties;
 
-public class Gestion_BDD {
+public class Gestion_BDD extends Menu{
     public String jdbcUrl;
     public String  username;
     public String password;
@@ -33,7 +33,7 @@ public class Gestion_BDD {
         }
     }
 
-    public void afficher_creneau_rdv_dispo ( String date){
+   /* public void afficher_creneau_rdv_dispo ( String date){
         connexion_a_bdd();
         try {
             String my_request = "WITH creneauxDisponibles AS " +
@@ -71,7 +71,7 @@ public class Gestion_BDD {
         } catch (Exception e) {
             System.out.println("une erreur est apparue en ouvrant la liste des creneaux disponible : " + e);
         }
-    }
+    }*/
 
     
     

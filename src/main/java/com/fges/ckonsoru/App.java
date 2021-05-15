@@ -24,7 +24,8 @@ public class App {
 
 
         Gestion_BDD ma_base_D = new Gestion_BDD();
-        //ma_base_D.connexion_a_bdd();
+        Afficher_creneau mes_creneaux = new Afficher_creneau();
+        Rendez_vous_client les_rdv_client = new Rendez_vous_client();
         Menu menu_principal = new Menu();
         Integer choix_utilisateur ; 
         String choix_nom_client ; 
@@ -35,16 +36,10 @@ public class App {
             switch (choix_utilisateur) {
                 case 1:
                     //afficher les créneaux de rendez-vous disponibles pour une date donnée
-                    System.out.println("Créneaux disponibles");
-                    System.out.println("Entrer une date : ");
-                    String ma_date = menu_principal.f_choix_str();
-                    ma_base_D.afficher_creneau_rdv_dispo(ma_date);
+                    mes_creneaux.afficher_creneau_rdv_dispo();
                     break;
                 case 2: //lister les rendez-vous d’un client
-                    System.out.println("Affichage des rendez vous par client");
-                    System.out.println("Entrer le nom du client : ");
-                    choix_nom_client = menu_principal.f_choix_str();
-                    ma_base_D.Get_client_rdv(choix_nom_client);
+                    les_rdv_client.Get_client_rdv();
                     break;
                 case 3://prendre un rendez-vous (date, créneau, nom vétérinaire, nom client)
                     System.out.println("Prendre un rendez-vous : ");
