@@ -4,6 +4,9 @@ import java.sql.*;
 
 public class Gestion_BDD {
     public static Connection connexion ;
+    public static String UrlJDBC = "jdbc:postgresql://localhost:5432/ckonsoru" ;
+    public static String userlog= "postgres" ;
+    public static String mdplog = "" ;
  
     private  Gestion_BDD (){}  // faire en sorte que le constructeur soit privé  qu' on ne puisse pas instancier une Gestion_BDD ailleurs
 
@@ -13,7 +16,7 @@ public class Gestion_BDD {
         System.out.println(this.password);*/
             try { 
                 if (connexion== null) {
-                    connexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ckonsoru", "postgres","RcathoL(PostgreSQL)23;");
+                    connexion = DriverManager.getConnection(UrlJDBC, userlog,mdplog);
                     System.out.println("connected");
                     
                 }
