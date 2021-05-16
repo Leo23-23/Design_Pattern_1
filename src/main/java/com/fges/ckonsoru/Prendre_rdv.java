@@ -36,7 +36,7 @@ public class Prendre_rdv extends Gestion_BDD {
 
     public int PrendreRdv() {
         
-        connexion_a_bdd();  
+        super.connexion_a_bdd();  
         System.out.println("Prendre un rendez-vous : ");
         System.out.println("Entrer le nom du veterinaire : ");
         String choix_nom_veto = super.f_choix_str();
@@ -60,7 +60,7 @@ public class Prendre_rdv extends Gestion_BDD {
             PreparedStatement statement = connexion.prepareStatement(My_request);
             statement.executeUpdate();
             
-            connexion.close();
+            super.deconnexion_de_bdd();
             System.out.println("Rendez vous pris avec succes");
             return 1;
             

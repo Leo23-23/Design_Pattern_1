@@ -25,11 +25,19 @@ public class Gestion_BDD extends Menu{
         try { 
             connexion = DriverManager.getConnection(this.jdbcUrl, this.username,this.password);
             System.out.println("connected");
-           /* connexion.close();*/
         }
         catch(SQLException e){ 
             System.out.println("erreur de connexion a la base de donnée");
             e.printStackTrace();
         }
+    }
+    public void deconnexion_de_bdd(){
+        try {
+            connexion.close();
+            System.out.println("dis-connected");
+        } catch (Exception e) {
+            System.out.println("Erreur de fermeture de la connexion a la base de donnée");
+        }
+        
     }
 }

@@ -4,7 +4,7 @@ import java.sql.*;
 public class Rendez_vous_client  extends Gestion_BDD{
 
     public void Get_client_rdv (){
-        connexion_a_bdd();
+        super.connexion_a_bdd();
         System.out.println("Affichage des rendez vous par client");
         System.out.println("Entrer le nom du client : ");
         String Nom = super.f_choix_str();
@@ -31,7 +31,7 @@ public class Rendez_vous_client  extends Gestion_BDD{
                 System.out.println("Le client n' a pas pris de rendez vous.");
             }
             System.out.println( compteur + " resultat(s) trouvés ");
-            connexion.close();
+            super.deconnexion_de_bdd();
            
             
         } catch (SQLException e) {

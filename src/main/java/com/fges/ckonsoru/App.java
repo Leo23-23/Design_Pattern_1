@@ -23,7 +23,7 @@ public class App {
             +properties.getProperty("persistence"));
 
 
-        Gestion_BDD ma_base_D = new Gestion_BDD();
+        //Gestion_BDD ma_base_D = new Gestion_BDD();
         Afficher_creneau mes_creneaux = new Afficher_creneau();
         Rendez_vous_client les_rdv_client = new Rendez_vous_client();
         Prendre_rdv mon_rdv = new Prendre_rdv();
@@ -34,6 +34,7 @@ public class App {
             System.out.println(menu_principal);
             System.out.println("votre choix :");
              choix_utilisateur =  menu_principal.f_choix_utilisateur();
+             //ma_base_D. connexion_a_bdd ();
             switch (choix_utilisateur) {
                 case 1:
                     //afficher les créneaux de rendez-vous disponibles pour une date donnée
@@ -50,6 +51,7 @@ public class App {
                     break;
                 case 9: // quitter
                     System.out.println("Au revoir");
+                   //ma_base_D.deconnexion_de_bdd();
                     break;
                 default:
                     System.out.println("Je ne connais pas cette commande");

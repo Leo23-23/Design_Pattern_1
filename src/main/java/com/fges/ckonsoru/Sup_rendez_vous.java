@@ -32,7 +32,7 @@ public class Sup_rendez_vous  extends Gestion_BDD{
 
     public int SupprimerRdv() {
         
-        connexion_a_bdd();
+       super. connexion_a_bdd();
         System.out.println("verifier qu' un rendez_vous existe : ");
         System.out.println("Entrer le nom du client : ");
         String choix_nom_client_rdv_sup = super.f_choix_str();
@@ -52,7 +52,7 @@ public class Sup_rendez_vous  extends Gestion_BDD{
             PreparedStatement statement = connexion.prepareStatement(My_request);
             statement.executeUpdate();
             
-            connexion.close();
+            super.deconnexion_de_bdd();
             
             System.out.println("Suppression du rdv avec succes");
             return  1;

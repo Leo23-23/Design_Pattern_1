@@ -40,14 +40,9 @@ public class Afficher_creneau extends Gestion_BDD {
                 System.out.println(res.getString(1) + " disponible le : " + res.getString(2) );
             }
             
-            connexion.close();
+           super.deconnexion_de_bdd();
         } catch (Exception e) {
             System.out.println("une erreur est apparue en ouvrant la liste des creneaux disponible : " + e);
         }
-    }
-
-    public void interaction_act1(){
-
-    }
-    
+    } 
 }
