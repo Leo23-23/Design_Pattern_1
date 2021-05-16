@@ -2,11 +2,12 @@ package com.fges.ckonsoru;
 import java.sql.*;
 
 
-public class Sup_rendez_vous  extends Gestion_BDD{
+public class Sup_rendez_vous  extends Menu{
+    Connection connexion = Gestion_BDD.connexion_a_bdd ();
 
 
     public Boolean verifier_rdv_exist (String nom_client, String horaire, String date) {
-        connexion_a_bdd();         
+        //connexion_a_bdd();         
         try {
             
             String My_request = "SELECT * FROM rendezvous"
@@ -32,7 +33,7 @@ public class Sup_rendez_vous  extends Gestion_BDD{
 
     public int SupprimerRdv() {
         
-       super. connexion_a_bdd();
+        Connection connexion = Gestion_BDD.connexion_a_bdd ();
         System.out.println("verifier qu' un rendez_vous existe : ");
         System.out.println("Entrer le nom du client : ");
         String choix_nom_client_rdv_sup = super.f_choix_str();
@@ -53,7 +54,7 @@ public class Sup_rendez_vous  extends Gestion_BDD{
             statement.setString(1, choix_nom_client_rdv_sup);
             statement.executeUpdate();
             
-            super.deconnexion_de_bdd();
+            //super.deconnexion_de_bdd();
             
             System.out.println("Suppression du rdv avec succes");
             return  1;

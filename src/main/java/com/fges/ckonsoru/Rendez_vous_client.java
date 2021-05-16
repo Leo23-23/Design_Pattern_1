@@ -1,10 +1,11 @@
 package com.fges.ckonsoru;
 import java.sql.*;
 
-public class Rendez_vous_client  extends Gestion_BDD{
+public class Rendez_vous_client  extends Menu{
+    Connection connexion = Gestion_BDD.connexion_a_bdd ();
 
     public void Get_client_rdv (){
-        super.connexion_a_bdd();
+        //super.connexion_a_bdd();
         System.out.println("Affichage des rendez vous par client");
         System.out.println("Entrer le nom du client : ");
         String Nom = super.f_choix_str();
@@ -32,7 +33,7 @@ public class Rendez_vous_client  extends Gestion_BDD{
                 System.out.println("Le client n' a pas pris de rendez vous.");
             }
             System.out.println( compteur + " resultat(s) trouvés ");
-            super.deconnexion_de_bdd();
+            //super.deconnexion_de_bdd();
            
             
         } catch (SQLException e) {

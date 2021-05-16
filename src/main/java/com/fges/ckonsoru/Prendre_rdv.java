@@ -1,10 +1,10 @@
 package com.fges.ckonsoru;
 import java.sql.*;
 
-public class Prendre_rdv extends Gestion_BDD {
-
+public class Prendre_rdv extends Menu {
+    Connection connexion = Gestion_BDD.connexion_a_bdd ();
     public  Boolean Rdv_Indisponible_veterinaire (String nom_veterinaire, String horaire , String date) {
-        connexion_a_bdd();        
+        //connexion_a_bdd();        
         try {
             
             String My_request = "SELECT * FROM rendezvous"
@@ -36,7 +36,8 @@ public class Prendre_rdv extends Gestion_BDD {
 
     public int PrendreRdv() {
         
-        super.connexion_a_bdd();  
+        //super.connexion_a_bdd();  
+        Connection connexion = Gestion_BDD.connexion_a_bdd ();
         System.out.println("Prendre un rendez-vous : ");
         System.out.println("Entrer le nom du veterinaire : ");
         String choix_nom_veto = super.f_choix_str();
@@ -62,7 +63,7 @@ public class Prendre_rdv extends Gestion_BDD {
             statement.setString(2, nom_client);
             statement.executeUpdate();
             
-            super.deconnexion_de_bdd();
+            //super.deconnexion_de_bdd();
             System.out.println("Rendez vous pris avec succes");
             return 1;
             

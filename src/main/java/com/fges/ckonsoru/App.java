@@ -5,6 +5,7 @@
  */
 package com.fges.ckonsoru;
 import java.util.Properties;
+import java.sql.*;
 
 /**
  * Launch the App
@@ -21,6 +22,7 @@ public class App {
         Properties properties = cf.getProperties();
         System.out.println("Mode de persistence : "
             +properties.getProperty("persistence"));
+         Gestion_BDD.connexion_a_bdd ();
 
 
         //Gestion_BDD ma_base_D = new Gestion_BDD();
@@ -51,7 +53,7 @@ public class App {
                     break;
                 case 9: // quitter
                     System.out.println("Au revoir");
-                   //ma_base_D.deconnexion_de_bdd();
+                    Gestion_BDD.deconnexion_de_bdd();
                     break;
                 default:
                     System.out.println("Je ne connais pas cette commande");

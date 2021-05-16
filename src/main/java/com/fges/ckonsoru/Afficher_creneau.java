@@ -1,10 +1,11 @@
 package com.fges.ckonsoru;
 import java.sql.*;
 
-public class Afficher_creneau extends Gestion_BDD {
-
+public class Afficher_creneau extends Menu {
+    Connection connexion = Gestion_BDD.connexion_a_bdd ();
     public void afficher_creneau_rdv_dispo ( ){
-        super.connexion_a_bdd();
+        
+        //super.connexion_a_bdd();
         System.out.println("Créneaux disponibles");
         System.out.println("Entrer une date : ");
         String date = super.f_choix_str();
@@ -45,7 +46,7 @@ public class Afficher_creneau extends Gestion_BDD {
                 System.out.println(res.getString(1) + " disponible le : " + res.getString(2) );
             }
             
-           super.deconnexion_de_bdd();
+           //connexion = Gestion_BDD.deconnexion_de_bdd();
         } catch (Exception e) {
             System.out.println("une erreur est apparue en ouvrant la liste des creneaux disponible : " + e);
         }
