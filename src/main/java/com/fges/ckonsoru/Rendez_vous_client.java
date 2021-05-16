@@ -13,10 +13,11 @@ public class Rendez_vous_client  extends Gestion_BDD{
             String my_request = "SELECT rv_id, rv_debut, rv_client, vet_nom" +
                                 " FROM rendezvous" +
                                 " INNER JOIN veterinaire ON rendezvous.vet_id = veterinaire.vet_id" +
-                                " WHERE rv_client = '" + Nom + "'" +
+                                " WHERE rv_client = ?" +
                                 " ORDER BY rv_debut DESC;";
             
             PreparedStatement statement = connexion.prepareStatement(my_request);
+            statement.setString(1,  Nom);
             ResultSet res = statement.executeQuery();
             
             

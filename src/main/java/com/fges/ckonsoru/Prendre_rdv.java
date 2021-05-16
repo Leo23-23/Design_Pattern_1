@@ -53,11 +53,13 @@ public class Prendre_rdv extends Gestion_BDD {
         try {
             
             String My_request = "INSERT INTO rendezvous (vet_id, rv_debut, rv_client)" +
-                            "    VALUES ((SELECT vet_id FROM veterinaire WHERE vet_nom = '" +choix_nom_veto + "')," +
+                            "    VALUES ((SELECT vet_id FROM veterinaire WHERE vet_nom = ?)," +
                             "        '"+date_rdv +" "+ choix_horaire + "'," +
-                            "        '" + nom_client + "');";
+                            "       ?);";
             
             PreparedStatement statement = connexion.prepareStatement(My_request);
+            statement.setString(1, choix_nom_veto);
+            statement.setString(2, nom_client);
             statement.executeUpdate();
             
             super.deconnexion_de_bdd();

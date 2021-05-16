@@ -47,9 +47,10 @@ public class Sup_rendez_vous  extends Gestion_BDD{
         try {
             
             String My_request = "DELETE FROM rendezvous"
-                    + " WHERE rv_client = '" + choix_nom_client_rdv_sup + "' AND rv_debut = '"+choix_date_sup+" "+ choix_horaire_sup + "';";
+                    + " WHERE rv_client = ? AND rv_debut = '"+choix_date_sup+" "+ choix_horaire_sup + "';";
             
             PreparedStatement statement = connexion.prepareStatement(My_request);
+            statement.setString(1, choix_nom_client_rdv_sup);
             statement.executeUpdate();
             
             super.deconnexion_de_bdd();
