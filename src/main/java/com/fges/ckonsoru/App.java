@@ -30,6 +30,7 @@ public class App {
         Rendez_vous_client les_rdv_client = new Rendez_vous_client();
         Prendre_rdv mon_rdv = new Prendre_rdv();
         Sup_rendez_vous sup_mon_rdv = new  Sup_rendez_vous();
+        Liste_annulation ma_liste = new  Liste_annulation();
         Menu menu_principal = new Menu();
         Integer choix_utilisateur;
         do {
@@ -50,6 +51,9 @@ public class App {
                     break;
                 case 4://supprimer un rendez-vous
                     sup_mon_rdv.SupprimerRdv();
+                    break;
+                case 7://supprimer un rendez-vous
+                    ma_liste.lister();
                     break;
                 case 9: // quitter
                     System.out.println("Au revoir");

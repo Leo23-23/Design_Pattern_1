@@ -32,6 +32,13 @@
 
 
   <dependencies>
+
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.10.10</version>
+    </dependency>
+    
     <dependency>
       <groupId>jdom</groupId>
       <artifactId>jdom</artifactId>
@@ -49,6 +56,7 @@
       <artifactId>jdom</artifactId>
       <version>2.0.2</version>
     </dependency>
+
   </dependencies>
 
   

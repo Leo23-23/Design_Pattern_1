@@ -18,6 +18,7 @@ public class Menu {
         liste.add("2 - Lister les rdv passes, presents et a venir d'un client");
         liste.add("3 - Prendre un rdv");
         liste.add("4 - Supprimer un rdv");
+        liste.add("7 - Liste des annulations");
         liste.add("9 - Quitter");
         this.mes_choix = liste;
 

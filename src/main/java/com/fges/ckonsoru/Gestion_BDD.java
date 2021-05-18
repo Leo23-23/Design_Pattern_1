@@ -6,7 +6,7 @@ public class Gestion_BDD {
     public static Connection connexion ;
     public static String UrlJDBC = "jdbc:postgresql://localhost:5432/ckonsoru" ;
     public static String userlog= "postgres" ;
-    public static String mdplog = "" ;
+    public static String mdplog = "RcathoL(PostgreSQL)23;" ;
  
     private  Gestion_BDD (){}  // faire en sorte que le constructeur soit privé  qu' on ne puisse pas instancier une Gestion_BDD ailleurs
 
