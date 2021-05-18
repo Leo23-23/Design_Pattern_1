@@ -18,6 +18,10 @@ public class Gestion_time {
     long diff = ChronoUnit.SECONDS.between(date_debut,  date_fin);
     return diff;
    }
+   public long Get_Duration_Day(LocalDateTime date_debut , LocalDateTime date_fin){
+    long diff = ChronoUnit.DAYS.between(date_debut,  date_fin);
+    return diff;
+   }
    public long Get_Duration_Hour(long diff_hour){
        return diff_hour /3600%24;
    }
@@ -39,17 +43,29 @@ public class Gestion_time {
        long dif_minute;
        long dif_second;
        // je commence par transformer la date d' annulation en date
-   Date madate1= this.dateStr_to_Date(date);
-   //je vais transformer cette date en localdatetime
-   LocalDateTime madate2 = this.dateDate_to_LocalDateTime(madate1);
-   //je vais faire la difference entre mes 2 localdatetime
-   long diff_date = this.Duration_2_LocalDateTime_to_SECOND(now, madate2);
-   //je prends chaque difference : 
-   dif_heure = this.Get_Duration_Hour(diff_date);
-   dif_minute = this.Get_Duration_Minutes(diff_date);
-   dif_second = this.Get_Duration_Seconds(diff_date);
+        Date madate1= this.dateStr_to_Date(date);
+        //je vais transformer cette date en localdatetime
+        LocalDateTime madate2 = this.dateDate_to_LocalDateTime(madate1);
+        //je vais faire la difference entre mes 2 localdatetime
+        long diff_date = this.Duration_2_LocalDateTime_to_SECOND(now, madate2);
+        //je prends chaque difference : 
+        dif_heure = this.Get_Duration_Hour(diff_date);
+        dif_minute = this.Get_Duration_Minutes(diff_date);
+        dif_second = this.Get_Duration_Seconds(diff_date);
 
-   return this.hh_mm_ss(dif_heure, dif_minute, dif_second);
+        return this.hh_mm_ss(dif_heure, dif_minute, dif_second);
    }
-    
+
+
+   public long  traitement_H24(LocalDateTime now, String date)throws ParseException {
+    // je commence par transformer la date d' annulation en date
+    Date madate1= this.dateStr_to_Date(date);
+    //je vais transformer cette date en localdatetime
+   LocalDateTime madate2 = this.dateDate_to_LocalDateTime(madate1);
+    //je vais faire la difference entre mes 2 localdatetime
+    long diff_jour = this.Get_Duration_Day(now, madate2);
+    //je prends la difference en heure : 
+    //dif_jour = this.Get_Duration_Hour(diff_jour);
+    return diff_jour;
+   }    
 }

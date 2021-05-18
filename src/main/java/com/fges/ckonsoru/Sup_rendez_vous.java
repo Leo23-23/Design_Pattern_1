@@ -32,7 +32,7 @@ public class Sup_rendez_vous  extends Menu{
         }   
     }
 
-    public int SupprimerRdv() {
+    public int SupprimerRdv() throws ParseException {
         
         Connection connexion = Gestion_BDD.connexion_a_bdd ();
         Gestion_time diff_time = new Gestion_time();
@@ -47,6 +47,7 @@ public class Sup_rendez_vous  extends Menu{
         String choix_horaire_sup = super.f_choix_str();
         String date_heure = diff_time.date_heure( choix_date_sup,choix_horaire_sup);
         LocalDateTime time_now = LocalDateTime.now();
+        long delaiH24 = diff_time.traitement_H24(time_now, date_heure);
         String gestion_time;
         try {
             gestion_time = diff_time.traitement_date(time_now, date_heure);
@@ -68,23 +69,24 @@ public class Sup_rendez_vous  extends Menu{
                     statement.executeUpdate();
 
                     System.out.println("Suppression du rdv avec succes");
-                
-
-                try {
-                        String My_request2 = "INSERT INTO annulation (ann_client, ann_creneau, vet_id, ann_delai)"+
-                            "  VALUES (? , "+
-                            "         '"+choix_date_sup+" "+choix_horaire_sup+"' ," +
-                            "          (SELECT vet_id FROM veterinaire WHERE vet_nom = ?) , "+
-                            "         '"+gestion_time+"');";
-                        
-                        PreparedStatement statement2 = connexion.prepareStatement(My_request2);
-                        statement2.setString(1, choix_nom_client_rdv_sup);
-                        statement2.setString(2, choix_nom_veto_rdv_sup );
-                        //statement2.setString(3, gestion_time);
-                        statement2.executeUpdate();
-                } catch (SQLException e) {
-                        System.out.println("Une erreur est apparue lors de l' insertion dans annulation : " + e);
-                }
+                //System.out.println("le delai en jour est : "+delaiH24 );
+                if (delaiH24<1) { 
+                    try {
+                            String My_request2 = "INSERT INTO annulation (ann_client, ann_creneau, vet_id, ann_delai)"+
+                                "  VALUES (? , "+
+                                "         '"+choix_date_sup+" "+choix_horaire_sup+"' ," +
+                                "          (SELECT vet_id FROM veterinaire WHERE vet_nom = ?) , "+
+                                "         '"+gestion_time+"');";
+                            
+                            PreparedStatement statement2 = connexion.prepareStatement(My_request2);
+                            statement2.setString(1, choix_nom_client_rdv_sup);
+                            statement2.setString(2, choix_nom_veto_rdv_sup );
+                            //statement2.setString(3, gestion_time);
+                            statement2.executeUpdate();
+                    } catch (SQLException e) {
+                            System.out.println("Une erreur est apparue lors de l' insertion dans annulation : " + e);
+                    }
+                 }
                 return  1; 
 
                 } catch (SQLException e) {
